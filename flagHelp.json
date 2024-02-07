@@ -1,0 +1,42 @@
+{
+    "arping": {
+        "-w": "Set time for arp to run", 
+        "-c": "Set count total for request", 
+        "-f": "Stop at first reply", 
+        "-I": "Select network interface",
+        "-b": "Send only MAC broadcasts",
+        "-U": "Sends unsolicited ARP request, or updates to neighboring hosts before a request is made",
+        "-A": "Updates art tables in reply mode instead of unsolicited",
+        "-s": "Sets source IP address",
+        "-D": "Duplicate address detection, returns 1 if a duplciate is found, 0 if no duplicate"
+    },
+    "arp":{
+        "-d": "Deletes arp table entry, can append a wildcard to delete all",
+        "-s": "Set up a new table entry",
+        "-a": "Display arp table for a particular IP",
+        "-g": "Works the same as arp -a"
+    },
+    "dig": {
+        "-4": "IPv4 address for DNS resolution",
+        "-6": "Ipv6 address for DNS resolution",
+        "-p": "Port number for DNS resolution",
+        "-f": "Filename for batch lookups",
+        "-x": "Allows for reverse looks -x dot-notation"
+    },
+    "ip": {
+        "a": "Display and modify protocol addresses",
+        "l": "Display and modify network interfaces",
+        "r": "Display and alter routing table",
+        "n": "Display and manipulate neighbor objects (ARP table)"
+
+    },
+    "mtr": {
+        "-4": "Only ipv4",
+        "-6": "Only ipv6",
+        "-c": "Count of pings to send",
+        "-z": "Display AS number",
+        "-n": "Do not resolve hostname",
+        "-b": "Display IP and hostname",
+        "-w": "Output a wide range of reports"
+    }
+}
