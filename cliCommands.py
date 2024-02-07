@@ -1,6 +1,7 @@
 import os
 import sys
 from PyQt6 import QtGui, QtCore, QtWidgets
+from qt_material import apply_stylesheet
 
 #TO DO: Add help window support, Add switches for calls
 
@@ -115,5 +116,6 @@ class MainWindow(QtWidgets.QMainWindow):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
+    apply_stylesheet(app, theme='light_blue.xml')
     window.show()
     sys.exit(app.exec())
