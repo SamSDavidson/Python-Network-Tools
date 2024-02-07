@@ -2,6 +2,7 @@ import os
 import sys
 from PyQt6 import QtGui, QtCore, QtWidgets
 
+#TO DO: Add help window support, Add switches for calls
 
 class MainWindow(QtWidgets.QMainWindow):
     current_os = None
@@ -92,11 +93,14 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.create_flags(self.linux_commands[text])
             else:
                 print(f"Linux command '{text}' not found.")
-
+    
+    # Append flags to horizontal layout box
     def create_flags(self, flags):
         for flag in flags:
             self.flag_box.addWidget(QtWidgets.QCheckBox(flag))
 
+    # Run commands based on argument field
+    #TO DO - import selected flags into run command
     def on_run_button(self):
         if self.os_select.currentIndex() == 0:
             if self.command_select.currentText() in self.windows_commands:
