@@ -1,5 +1,6 @@
 import os, sys, subprocess
 from PyQt6 import QtGui, QtCore, QtWidgets
+from PyQt6.QtCore import Qt
 from qt_material import apply_stylesheet
 
 # TO DO: Add help window support, Add switches for calls
@@ -34,7 +35,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__()
 
         # Set up Window
-        main_layout = QtWidgets.QHBoxLayout()
+        main_layout = QtWidgets.QVBoxLayout()
         self.side_layout = QtWidgets.QVBoxLayout()
         central_widget = QtWidgets.QWidget()
         self.setCentralWidget(central_widget)
@@ -49,12 +50,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.command_select = QtWidgets.QComboBox()
         self.argument_field = QtWidgets.QLineEdit()
         self.run_button = QtWidgets.QPushButton("Run")
+        self.help_button = QtWidgets.QPushButton("Help")
         self.output_window = QtWidgets.QPlainTextEdit()
 
         # Set Connections
         self.os_select.currentIndexChanged.connect(self.on_os_select)
         self.command_select.currentTextChanged.connect(self.on_command_select)
         self.run_button.clicked.connect(self.on_run_button)
+        self.help_button.clicked.connect(self.on_help_button)
 
         # Add Widgets to Layout
         main_layout.addWidget(label)
@@ -63,9 +66,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.side_layout.addLayout(self.flag_box)
         self.side_layout.addWidget(self.argument_field)
         self.side_layout.addWidget(self.run_button)
+        self.side_layout.addWidget(self.help_button)
         self.output_section.addWidget(self.output_window)
 
         # Add Layouts
+        self.side_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.side_layout.addStretch()
         main_layout.addLayout(self.side_layout)
         main_layout.addLayout(self.output_section)
 
@@ -115,12 +121,18 @@ class MainWindow(QtWidgets.QMainWindow):
     # Run commands based on argument field
     # TO DO - import selected flags into run command
     def on_run_button(self):
+        self.run_command(
+            [f"{self.command_select.currentText()}", f"{self.argument_field.text()}"]
+        )
+
+    def on_help_button(self):
+        self.run_command(["man", f"{self.command_select.currentText()}"])
+        # f'{self.argument_field.text()}
+
+    def run_command(self, commands):
         try:
             output, error = subprocess.Popen(
-                [
-                    f"{self.command_select.currentText()}",
-                    f"{self.argument_field.text()}",
-                ],
+                commands,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             ).communicate()
